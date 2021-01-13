@@ -4,6 +4,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/Home";
 import Courses from "./components/Courses";
+import AddCourse from "./components/AddCourse";
 
 function App() {
 	return (
@@ -13,6 +14,7 @@ function App() {
 				<Route exact path="/register" component={Register} />
 				<Route exact path="/home" component={Home} />
 				<Route exact path="/courses" component={Courses} />
+				<Route exact path="/addCourse" component={AddCourse} />
 			</Switch>
 		</Router>
 	);

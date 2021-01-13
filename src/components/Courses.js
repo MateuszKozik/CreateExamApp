@@ -1,7 +1,7 @@
 import { Button, Grid, Typography } from "@material-ui/core";
 import React, { Component } from "react";
 import Navbar from "./Navbar";
-import { getCourses } from "../actions/courseActions";
+import { getCourses, deleteCourse } from "../actions/courseActions";
 import {
 	IconButton,
 	Table,
@@ -13,7 +13,6 @@ import {
 	Tooltip
 } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
-
 import DeleteIcon from "@material-ui/icons/Delete";
 
 class Courses extends Component {
@@ -41,7 +40,11 @@ class Courses extends Component {
 						<Typography variant="h5">Przedmioty</Typography>
 					</Grid>
 					<Grid item xs={12} style={{ textAlign: "left", marginLeft: 10 }}>
-						<Button variant="contained" color="primary">
+						<Button
+							variant="contained"
+							color="primary"
+							onClick={() => this.props.history.push("/addCourse")}
+						>
 							Dodaj przedmiot
 						</Button>
 					</Grid>
@@ -91,11 +94,11 @@ class Courses extends Component {
 																	<EditIcon />
 																</IconButton>
 															</Tooltip>
-															<Tooltip title="Edytuj">
+															<Tooltip title="Usuń">
 																<IconButton
 																	color="secondary"
 																	onClick={() => {
-																		console.log("usuwanie");
+																		deleteCourse(course.id);
 																	}}
 																>
 																	<DeleteIcon />

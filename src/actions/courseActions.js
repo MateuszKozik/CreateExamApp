@@ -18,8 +18,12 @@ export const getCourses = async () => {
 
 export const createCourse = async (course) => {
 	try {
-		var bodyFormData = new FormData();
-		bodyFormData.append("title", course);
+		const { title, description } = course;
+
+		let bodyFormData = new FormData();
+		bodyFormData.append("title", title);
+		bodyFormData.append("description", description);
+
 		const token = getJWTToken();
 		const res = await axios.post("/api/Course", bodyFormData, {
 			headers: {
