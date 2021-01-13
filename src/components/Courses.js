@@ -87,9 +87,11 @@ class Courses extends Component {
 															<Tooltip title="Edytuj">
 																<IconButton
 																	color="primary"
-																	onClick={() => {
-																		console.log("edycja");
-																	}}
+																	onClick={() =>
+																		this.props.history.push(
+																			`/editCourse/${course.id}`
+																		)
+																	}
 																>
 																	<EditIcon />
 																</IconButton>

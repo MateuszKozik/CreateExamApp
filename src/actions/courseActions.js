@@ -54,8 +54,15 @@ export const createCourse = async (course) => {
 
 export const updateCourse = async (updatedCourse) => {
 	try {
+		const { id, title, description } = updatedCourse;
+
+		let bodyFormData = new FormData();
+		bodyFormData.append("id", id);
+		bodyFormData.append("title", title);
+		bodyFormData.append("description", description);
+
 		const token = getJWTToken();
-		const res = await axios.put("/api/Course", updatedCourse, {
+		const res = await axios.put("/api/Course", bodyFormData, {
 			headers: {
 				Authorization: `Bearer ${token}`
 			}
