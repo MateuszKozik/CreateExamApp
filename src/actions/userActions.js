@@ -1,5 +1,5 @@
 import axios from "axios";
-import setJWTToken from "../security/setJWTToken";
+import { setJWTToken } from "../security/jwtToken";
 
 export const register = async (user) => {
 	try {

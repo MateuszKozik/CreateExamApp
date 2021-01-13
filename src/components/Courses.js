@@ -1,8 +1,20 @@
 import { Grid, Typography } from "@material-ui/core";
 import React, { Component } from "react";
 import Navbar from "./Navbar";
+import { getCourses } from "../actions/courseActions";
 
 class Courses extends Component {
+	state = {
+		courses: ""
+	};
+
+	componentDidMount() {
+		getCourses().then((res) => {
+			console.log(res.data.records);
+			this.setState({ courses: res.data.records });
+		});
+	}
+
 	render() {
 		return (
 			<>
