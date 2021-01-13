@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { TextField, Grid, Typography, Button } from "@material-ui/core";
 import { login } from "../actions/userActions";
+import { Link } from "react-router-dom";
 class Login extends Component {
 	state = {
 		email: "",
@@ -60,6 +61,22 @@ class Login extends Component {
 					>
 						Zaloguj
 					</Button>
+				</Grid>
+				<Grid item xs={12} style={{ marginTop: 20 }}>
+					<Typography>
+						Nie masz jeszcze konta?
+						<Link
+							style={{
+								fontWeight: 700,
+								textDecoration: "none",
+								color: "#000",
+								marginLeft: 5
+							}}
+							to="/register"
+						>
+							Zarejestruj się
+						</Link>
+					</Typography>
 				</Grid>
 			</Grid>
 		);
