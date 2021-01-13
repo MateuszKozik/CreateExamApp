@@ -5,8 +5,9 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
 import { logout } from "../actions/userActions";
+import { Link } from "react-router-dom";
+import { Home } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -36,11 +37,25 @@ export default function Navbar() {
 						className={classes.menuButton}
 						color="inherit"
 						aria-label="menu"
+						onClick={() => {
+							window.location.href = "/home";
+						}}
 					>
-						<MenuIcon />
+						<Home />
 					</IconButton>
-					<Typography variant="h6" className={classes.title}>
-						Przedmioty
+					<Typography className={classes.title}>
+						<Link
+							to="/courses"
+							style={{
+								fontWeight: 700,
+								textDecoration: "none",
+								color: "#fff",
+								marginLeft: 5
+							}}
+						>
+							{" "}
+							Przedmioty
+						</Link>
 					</Typography>
 					<Button onClick={handleLogout} color="inherit">
 						Wyloguj
