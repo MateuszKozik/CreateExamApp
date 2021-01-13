@@ -2,7 +2,7 @@ import axios from "axios";
 import setJWTToken from "../security/setJWTToken";
 
 export const register = (user) => {
-	axios.post("http://zaliczenie.btry.eu/api/Auth/Register", user).then(
+	axios.post("/api/Auth/Register", user).then(
 		(response) => {
 			return response;
 		},
@@ -29,4 +29,5 @@ export const login = async (user) => {
 
 export const logout = () => {
 	setJWTToken(false);
+	window.location.href = "/";
 };
