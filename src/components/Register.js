@@ -1,7 +1,30 @@
 import React, { Component } from "react";
 import { TextField, Grid, Typography, Button } from "@material-ui/core";
+import { register } from "../actions/userActions";
 
 class Register extends Component {
+	state = {
+		email: "",
+		name: "",
+		indexNumber: "",
+		password: "",
+		confirmPassword: ""
+	};
+
+	handleRegisterButtonClick = () => {
+		const { email, name, indexNumber, password, confirmPassword } = this.state;
+		const user = { email, name, indexNumber, password, confirmPassword };
+		register(user).then((res) => {
+			if (res && res.status === 200) {
+				window.location.href = "/login";
+			}
+		});
+	};
+
+	handleChange = (e) => {
+		this.setState({ [e.target.name]: e.target.value });
+	};
+
 	render() {
 		return (
 			<Grid container style={{ textAlign: "center", marginTop: 10 }}>
@@ -16,6 +39,7 @@ class Register extends Component {
 						name="email"
 						label="Email"
 						variant="outlined"
+						onChange={(e) => this.handleChange(e)}
 					/>
 				</Grid>
 
@@ -26,6 +50,7 @@ class Register extends Component {
 						id="name"
 						name="name"
 						variant="outlined"
+						onChange={(e) => this.handleChange(e)}
 					/>
 				</Grid>
 
@@ -36,6 +61,7 @@ class Register extends Component {
 						id="indexNumber"
 						name="indexNumber"
 						variant="outlined"
+						onChange={(e) => this.handleChange(e)}
 					/>
 				</Grid>
 
@@ -47,6 +73,7 @@ class Register extends Component {
 						label="Hasło"
 						id="password"
 						name="password"
+						onChange={(e) => this.handleChange(e)}
 					/>
 				</Grid>
 
@@ -58,10 +85,15 @@ class Register extends Component {
 						name="confirmPassword"
 						id="confirmPassword"
 						variant="outlined"
+						onChange={(e) => this.handleChange(e)}
 					/>
 				</Grid>
 				<Grid item xs={12} style={{ marginTop: 20 }}>
-					<Button variant="contained" color="primary">
+					<Button
+						variant="contained"
+						onClick={this.handleRegisterButtonClick}
+						color="primary"
+					>
 						Zarejestruj
 					</Button>
 				</Grid>

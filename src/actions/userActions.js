@@ -1,15 +1,14 @@
 import axios from "axios";
 import setJWTToken from "../security/setJWTToken";
 
-export const register = (user) => {
-	axios.post("/api/Auth/Register", user).then(
-		(response) => {
-			return response;
-		},
-		(error) => {
-			console.log(error);
-		}
-	);
+export const register = async (user) => {
+	try {
+		const res = await axios.post("/api/Auth/Register", user);
+
+		return res;
+	} catch (error) {
+		console.log(error);
+	}
 };
 
 export const login = async (user) => {

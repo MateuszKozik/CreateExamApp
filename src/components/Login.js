@@ -12,7 +12,6 @@ class Login extends Component {
 		const { email, password } = this.state;
 		const user = { email, password };
 		login(user).then((res) => {
-			console.log(res);
 			if (res && res.status === 200) {
 				window.location.href = "/home";
 			}
