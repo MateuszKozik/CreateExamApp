@@ -16,6 +16,21 @@ export const getCourses = async () => {
 	}
 };
 
+export const getCourse = async (courseId) => {
+	try {
+		const token = getJWTToken();
+		const res = await axios.get(`/api/Course/${courseId}`, {
+			headers: {
+				Authorization: `Bearer ${token}`
+			}
+		});
+
+		return res;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
 export const createCourse = async (course) => {
 	try {
 		const { title, description } = course;
