@@ -1,7 +1,6 @@
-import { Button, Grid, Typography } from "@material-ui/core";
 import React, { Component } from "react";
 import Navbar from "./Navbar";
-import { getCourses, deleteCourse } from "../actions/courseActions";
+import { getExams, deleteExam } from "../actions/examActions";
 import {
 	IconButton,
 	Table,
@@ -10,25 +9,31 @@ import {
 	TableContainer,
 	TableHead,
 	TableRow,
-	Tooltip
+	Tooltip,
+	Typography,
+	Grid,
+	Button
 } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { Link } from "react-router-dom";
 
-class Courses extends Component {
+class Exams extends Component {
 	state = {
-		courses: ""
+		exams: ""
 	};
 
 	componentDidMount() {
-		getCourses().then((res) => {
-			this.setState({ courses: res.data.records });
+		const { courseId } = this.props.match.params;
+		getExams(courseId).then((res) => {
+			if (res && res.status === 200) {
+				this.setState({ exams: res.data.records });
+			}
 		});
 	}
 
 	render() {
-		const { courses } = this.state;
+		const { exams } = this.state;
+		const { courseId } = this.props.match.params;
 		return (
 			<>
 				<Navbar />
@@ -38,15 +43,17 @@ class Courses extends Component {
 					style={{ textAlign: "center", marginTop: 10 }}
 				>
 					<Grid item xs={12}>
-						<Typography variant="h5">Przedmioty</Typography>
+						<Typography variant="h5">Egzaminy</Typography>
 					</Grid>
 					<Grid item xs={12} style={{ textAlign: "left", marginLeft: 10 }}>
 						<Button
 							variant="contained"
 							color="primary"
-							onClick={() => this.props.history.push("/addCourse")}
+							onClick={() =>
+								this.props.history.push(`/exams/${courseId}/addExam`)
+							}
 						>
-							Dodaj przedmiot
+							Dodaj egzamin
 						</Button>
 					</Grid>
 					<Grid item xs={12}>
@@ -56,12 +63,12 @@ class Courses extends Component {
 									<TableRow>
 										<TableCell>
 											<Typography>
-												<b>Nazwa przedmiotu</b>
+												<b>Nazwa egzaminu</b>
 											</Typography>
 										</TableCell>
 										<TableCell>
 											<Typography align="center">
-												<b>Opis</b>
+												<b>Status</b>
 											</Typography>
 										</TableCell>
 										<TableCell>
@@ -72,36 +79,27 @@ class Courses extends Component {
 									</TableRow>
 								</TableHead>
 								<TableBody>
-									{courses
-										? courses.map((course, index) => {
+									{exams
+										? exams.map((exam, index) => {
 												return (
 													<TableRow key={index}>
 														<TableCell>
-															<Typography>
-																<Link
-																	to={`/exams/${course.id}`}
-																	style={{
-																		color: "#000"
-																	}}
-																>
-																	{course.title}{" "}
-																</Link>{" "}
-															</Typography>
+															<Typography>{exam.description}</Typography>
 														</TableCell>
 														<TableCell>
 															<Typography align="center">
-																{course.description}
+																{exam.status}
 															</Typography>
 														</TableCell>
 														<TableCell align="center">
 															<Tooltip title="Edytuj">
 																<IconButton
 																	color="primary"
-																	onClick={() =>
+																	onClick={() => {
 																		this.props.history.push(
-																			`/editCourse/${course.id}`
-																		)
-																	}
+																			`/exams/${courseId}/${exam.id}`
+																		);
+																	}}
 																>
 																	<EditIcon />
 																</IconButton>
@@ -110,7 +108,7 @@ class Courses extends Component {
 																<IconButton
 																	color="secondary"
 																	onClick={() => {
-																		deleteCourse(course.id);
+																		deleteExam(exam.id);
 																	}}
 																>
 																	<DeleteIcon />
@@ -131,4 +129,4 @@ class Courses extends Component {
 	}
 }
 
-export default Courses;
+export default Exams;
