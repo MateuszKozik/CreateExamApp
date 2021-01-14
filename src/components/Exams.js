@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Navbar from "./Navbar";
-import { getExams, deleteExam } from "../actions/examActions";
+import { getExams, deleteExam, passExam } from "../actions/examActions";
 import {
 	IconButton,
 	Table,
@@ -16,6 +16,7 @@ import {
 } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 
 class Exams extends Component {
 	state = {
@@ -88,10 +89,20 @@ class Exams extends Component {
 														</TableCell>
 														<TableCell>
 															<Typography align="center">
-																{exam.status}
+																{exam.isPassed === false ? "Niezdany" : "Zdany"}
 															</Typography>
 														</TableCell>
 														<TableCell align="center">
+															<Tooltip title="Zalicz egzamin">
+																<IconButton
+																	color="primary"
+																	onClick={() => {
+																		passExam(exam.id);
+																	}}
+																>
+																	<CheckCircleIcon />
+																</IconButton>
+															</Tooltip>
 															<Tooltip title="Edytuj">
 																<IconButton
 																	color="primary"
