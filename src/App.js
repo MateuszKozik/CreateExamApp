@@ -7,6 +7,7 @@ import Courses from "./components/Courses";
 import AddCourse from "./components/AddCourse";
 import EditCourse from "./components/EditCourse";
 import Exams from "./components/Exams";
+import AddExam from "./components/AddExam";
 
 function App() {
 	return (
@@ -19,6 +20,7 @@ function App() {
 				<Route exact path="/addCourse" component={AddCourse} />
 				<Route exact path="/editCourse/:courseId" component={EditCourse} />
 				<Route exact path="/exams/:courseId" component={Exams} />
+				<Route exact path="/exams/:courseId/addExam" component={AddExam} />
 			</Switch>
 		</Router>
 	);
