@@ -66,6 +66,11 @@ class Courses extends Component {
 										</TableCell>
 										<TableCell>
 											<Typography align="center">
+												<b>Egzaminy</b>
+											</Typography>
+										</TableCell>
+										<TableCell>
+											<Typography align="center">
 												<b>Akcje</b>
 											</Typography>
 										</TableCell>
@@ -92,6 +97,27 @@ class Courses extends Component {
 															<Typography align="center">
 																{course.description}
 															</Typography>
+														</TableCell>
+														<TableCell>
+															{course.exams &&
+																course.exams.map((exam, i) => {
+																	return (
+																		<div
+																			style={{ textAlign: "center" }}
+																			key={i}
+																		>
+																			<Typography>
+																				{exam.description}
+																			</Typography>
+																			<Typography>
+																				<b>Status: </b>
+																				{exam.isPassed === false
+																					? "Niezdany"
+																					: "Zdany"}
+																			</Typography>
+																		</div>
+																	);
+																})}
 														</TableCell>
 														<TableCell align="center">
 															<Tooltip title="Edytuj">
